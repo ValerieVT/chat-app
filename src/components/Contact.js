@@ -1,20 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const contactPicture = 'https://randomuser.me/api/portraits/women/92.jpg';
-const contactName = 'Mabel Richards';
-const status = true;
-const whichStatus = [status ? 'online' : 'offline'];
-
-function Contact() {
+function Contact(props) {
+    const whichColorStatus = [props.status ? 'status-online': 'status-offline'];
+    const whichTextStatus = [props.status ? 'Online' : 'Offline'];
     return(
         <div className='Contact'>
-            <img className='avatar' src={contactPicture} alt='' />
+            <img className='avatar' src={props.avatar} alt='{props.name}' />
             <div>
-                <p className='name'>{contactName}</p>
-                <span className='status'><span className='status-online'></span></span>{whichStatus}
+                <p className='name'>{props.name}</p>
+                <span className='status'><span className={whichColorStatus}></span>{whichTextStatus}</span>
             </div>
         </div>
     );
 }
 
+Contact.propTypes = {
+    status: PropTypes.bool.isRequired,
+    avatar: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  };
 export default Contact;
