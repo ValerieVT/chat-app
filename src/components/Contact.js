@@ -1,25 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Contact(props) {
-  const whichColorStatus = props.online ? "status-online" : "status-offline";
-  const whichTextStatus = props.online ? "Online" : "Offline";
-  return (
-    <div className="Contact">
-      <img className="avatar" src={props.avatar} alt="{props.name}" />
-      <div>
-        <p className="name">{props.name}</p>
-        <span className="status">
-          <span className={whichColorStatus}></span>
-          {whichTextStatus}
-        </span>
+
+class Contact extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      online: false
+    }
+  }
+
+  render() {
+  const whichColorStatus = this.state.online ? "status-online" : "status-offline";
+  const whichTextStatus = this.state.online ? "Online" : "Offline";
+    return (
+      <div className="Contact">
+        <img className="avatar" src={this.props.avatar} alt="{this.props.name}" />
+        <div>
+          <p className="name">{this.props.name}</p>
+          <span className={this.state.online ? 'status status-online': 'status status-offline'} 
+          onClick={event => {
+            const isOnlineOrNot = !this.state.online;
+            this.setState({ online: isOnlineOrNot })
+          }
+        }>
+            <span className={whichColorStatus}></span>
+            {whichTextStatus}
+          </span>
+        </div>
       </div>
-    </div>
-  );
+    )
+  }
 }
 
 Contact.propTypes = {
-  status: PropTypes.bool.isRequired,
   avatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
 };

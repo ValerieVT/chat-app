@@ -46,3 +46,7 @@
   .Contact .status .status-offline {
     background: #f4511e;
   }
+
+  .Contact .status:hover{
+    cursor: pointer;
+  }
